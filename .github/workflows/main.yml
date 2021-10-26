@@ -20,6 +20,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        # ^Solved: https://stackoverflow.com/questions/69005895/github-action-for-google-app-engine-deliverables?rq=1
       - name: Deploy to App Engine
         id: deploy
         uses: google-github-actions/deploy-appengine@main
