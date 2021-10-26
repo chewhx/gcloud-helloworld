@@ -1,5 +1,6 @@
 require("dotenv").config();
 const config = process.env;
+const path = require("path");
 const express = require("express");
 const app = express();
 const apiRoutes = express.Router();
@@ -11,6 +12,8 @@ app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(express.static(path.resolve(__dirname, "./client/build")));
 
 const asyncHandler = (fn) => (req, res, next) => {
   Promise.resolve(fn(req, res, next)).catch(next);
@@ -26,6 +29,16 @@ apiRoutes.post(
 );
 
 app.use("/api/v1", apiRoutes);
+
+// Handle "/"
+app.get("/", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+});
+
+// Handle "*"
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+});
 
 // app.get(
 //   "/magazine",
