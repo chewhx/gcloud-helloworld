@@ -10,7 +10,7 @@ const App = () => {
     try {
       const { data } = await axios({
         method: "post",
-        url: `http://localhost:5000/api/v1/search`,
+        url: `api/v1/search`,
         data: {
           search: v,
         },
