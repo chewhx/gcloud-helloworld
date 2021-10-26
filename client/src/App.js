@@ -46,7 +46,7 @@ const App = () => {
           : results.map(({ abstract, web_url, lead_paragraph, source }) => (
               <ListGroup>
                 <ListGroup.Item>
-                  <a href={web_url} target="_blank">
+                  <a href={web_url} target="_blank" rel="noreferrer">
                     {abstract}
                   </a>
                   <br />
