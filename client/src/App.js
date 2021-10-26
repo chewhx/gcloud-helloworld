@@ -25,7 +25,7 @@ const App = () => {
       <Row>
         <Form.Group>
           <Form.Label htmlFor="searchbar">
-            <h1>Search NYT</h1>
+            <h1>Search NYT - v0.1.0</h1>
           </Form.Label>
           <Form.Control
             className="my-3"
