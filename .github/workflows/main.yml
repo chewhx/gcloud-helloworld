@@ -37,6 +37,7 @@ jobs:
       - name: Deploy to Cloud Run
         run: |-
           gcloud run deploy gcloud-helloworld-1 \
+            --project gcloud-helloworld-315201 \
             --image gcr.io/gcloud-helloworld-315201/gcloud-helloworld-1 \
       - name: Test
         run: curl "${{ steps.deploy.outputs.url }}"
