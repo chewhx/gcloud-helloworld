@@ -26,7 +26,7 @@ const App = () => {
       <Row>
         <Form.Group>
           <Form.Label htmlFor="searchbar">
-            <h1>Search NYT - v0.1.4</h1>
+            <h1>Search NYT - v.CloudRunGitHubDeploy</h1>
           </Form.Label>
           <Form.Control
             className="my-3"

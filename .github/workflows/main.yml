@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Deploy to GAE
+name: Deploy to GCR
 
 # Controls when the workflow will run
 on:
@@ -14,7 +14,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   deploy:
-    name: Deploying to Google Cloud
+    name: Deploy to Cloud Run
     runs-on: ubuntu-latest
 
     steps:
@@ -25,14 +25,18 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14
-      - name: Set up env
-        run: echo NYT_API_KEY=${{ secrets.NYT_API_KEY }} > .env
+      - name: Set up GCloud
+        uses: google-github-actions/setup-gcloud@master
+          with:
+            service_account_key: ${{ secrets.GCP_PRIVATE_KEY }}
+            export_default_credentials: true
+      # - name: Set up env
+      #   run: echo NYT_API_KEY=${{ secrets.NYT_API_KEY }} > .env
       - name: Build
         run: npm run build
-      - name: Deploy to App Engine
-        id: deploy
-        uses: google-github-actions/deploy-appengine@main
-        with:
-          credentials: ${{ secrets.GCP_PRIVATE_KEY }}
+      - name: Deploy to Cloud Run
+        run: |-
+          gcloud run deploy gcloud-helloworld-1 \
+            --image gcr.io/gcloud-helloworld-315201/gcloud-helloworld-1 \
       - name: Test
         run: curl "${{ steps.deploy.outputs.url }}"
