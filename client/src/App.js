@@ -10,7 +10,7 @@ const App = () => {
     try {
       const { data } = await axios({
         method: "post",
-        url: `api/v1/search`,
+        url: `/api/v1/search`,
         data: {
           search: v,
         },
@@ -26,7 +26,7 @@ const App = () => {
       <Row>
         <Form.Group>
           <Form.Label htmlFor="searchbar">
-            <h1>Search NYT - v0.1.0</h1>
+            <h1>Search NYT - v0.1.4</h1>
           </Form.Label>
           <Form.Control
             className="my-3"

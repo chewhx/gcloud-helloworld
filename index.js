@@ -30,41 +30,22 @@ apiRoutes.post(
 
 app.use("/api/v1", apiRoutes);
 
-// Handle "/"
-app.get("/", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
-});
+// // Handle "/"
+// app.get("/", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+// });
 
 // Handle "*"
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
 });
 
-// app.get(
-//   "/magazine",
-//   asyncHandler(async (req, res) => {
-//     const url = `https://api.nytimes.com/svc/topstories/v2/magazine.json?api-key=${config.NYT_API_KEY}`;
-//     const { data } = await axios.get(url);
-//     res.status(200).json(data);
-//   })
-// );
-
-// app.get(
-//   "/search/:searchTerm",
-//   asyncHandler(async (req, res) => {
-//     const url = `http://api.nytimes.com/svc/search/v2/articlesearch.json?q=${req.params.searchTerm}&api-key=${config.NYT_API_KEY}&begin_date=20210701&end_date=20210729`;
-
-//     const { data } = await axios.get(url);
-//     res.status(200).json(data);
-//   })
-// );
 const errorHandler = (req, res, err) => {
   console.log(err.stack);
   res.status(err.statusCode || 500).json({ success: false, messsage: err });
 };
 
 app.use(errorHandler);
-// gcloud functions deploy helloGCS --runtime nodejs14 --trigger-resource audio-articles --trigger-event google.storage.object.finalize
 
 const port = process.env.PORT || 5000;
 const server = app.listen(port, (err) => {
