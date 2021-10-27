@@ -30,15 +30,21 @@ apiRoutes.post(
 
 app.use("/api/v1", apiRoutes);
 
-// // Handle "/"
-// app.get("/", (req, res) => {
-//   res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
-// });
+// Handle "/"
+app.get(
+  "/",
+  asyncHandler(async (req, res) => {
+    res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+  })
+);
 
 // Handle "*"
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
-});
+app.get(
+  "*",
+  asyncHandler(async (req, res) => {
+    res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+  })
+);
 
 const errorHandler = (req, res, err) => {
   console.log(err.stack);
